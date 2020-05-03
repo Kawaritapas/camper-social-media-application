@@ -1,0 +1,28 @@
+<%- include("partials/header")%>
+
+<h1 style="color: white;">Notification</h1>
+
+<ul>
+	<% notifications.forEach(function(notification) { %>
+	<li style="color: white;">
+		<%if(notification.campgroundid){%>
+			<a href="/campgrounds/<%= notification.campgroundid %>" style="color: white;">
+				<%= notification.username %> created a new campground 
+			</a>
+		<%}%>
+	  <%	if(notification.commentid){%>
+			<a href="/campgrounds/<%= notification.commentid %>" style="color: white;">
+				<%= notification.username %> created a new comment 
+			</a>
+		<%}%>
+		
+	</li>
+	<% }); %>
+</ul>
+
+
+
+
+
+
+<%- include("partials/footer")%>

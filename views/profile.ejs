@@ -1,0 +1,97 @@
+<%- include("partials/header")%>
+<div class="ui container">
+    <div class="ui segment" style="z-index: 0;height:600px;background-color:black;">
+        <img src="<%=user.cover%>" style="height: 90%;width:100%">
+       <% if(user._id.equals(currentuser._id)){%>
+        <a href="/users/<%=user._id%>/edit" style="z-index: 1;">
+            <button class="ui primary button">
+                edit profile
+            </button>
+            </a>
+        <%}%>
+        <img class=" ui medium image" style="margin: auto;display: block;z-index: 2;margin-top:-120px;" src="<%=user.avatar%>"> 
+        <div class="ui segment" style="background-color: rgb(54, 54, 54);">
+            <h2 style="color: white;";"><%=user.firstName%> <%=user.lastName%></h2>
+            <p style="color: white;"><%=user.aboutyou%></p>
+            <div class="ui segment" style="background-color: black;">
+            <p style="color: white;">Share your Adventure</p>
+            <a href="/campgrounds/new" class="ui floated  right">
+             <button class="ui yellow button" style="color: black;">
+              Create a new post
+             </button>
+            </a>
+            </div>
+            <div class="ui segment" style="background-color: black;">
+            <p style="color: white;">About <%=user.firstName%></p>
+            <ul>
+            <li style="color: white;">Email:<%=user.email%></li>
+            <li style="color: white;">phone: <%=user.phone%></li>
+            <li style="color: white;">date of birth: <%=user.dateofbirth%></li>
+            <li style="color: white;">education: <%=user.education%></li>
+            <li style="color: white;">lives in: <%=user.lives%></li>
+            <li style="color: white;">website: <a href="<%=user.website%>"><%=user.website%></a></li>
+            <li style="color: white;">Gender: <%=user.gender%></li>
+            <li style="color: white;">languages: <%=user.languages%></li>
+            
+            
+            
+          <%  user.followers.map(function(follower){%>
+                <li style="color: white;">followers: <%=follower.username%></li>
+            <%})%>
+            </ul>
+            </div>
+            <div class="ui segment" style="background-color: black;">
+                <h2 style="color: white;text-align: center;">Posts created by <%=user.username%></h2>
+                <br>
+            <%campground.map(function(camp){%>
+             <%if(camp.author.id.equals(user._id)){%>
+                
+                <div class="ui card" style="margin: auto;display: block;width: 50%;">
+                    <div class="content">
+                      <div class="right floated meta">14h</div>
+                      <img class="ui avatar image" src="<%=camp.image%>"> <%=camp.author.username%>
+                    </div>
+                    <div class="image">
+                      <img src="<%=camp.image%>">
+                    </div>
+                    <div class="content">
+                      <span class="right floated">
+                        <i class="heart outline like icon"></i>
+                        17 likes
+                      </span>
+                      <span class="left floated">
+                          <%=camp.name%>
+                      </span>
+                    </div>
+                    <div class="extra content">
+                      <div class="ui large transparent left icon input">
+                          <a href="/campgrounds/<%=camp.id%>">
+                              <button class="ui primary button" style="width: 150px;">
+                                  More info
+                              </button>
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+             <%}%>
+            <%})%>
+            </div>
+
+           
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+     </div>
+
+    <%- include("partials/footer")%>

@@ -1,0 +1,9 @@
+<%- include("partials/header") %>
+    <div class="ui segment">
+        <form class="ui form" action="/campgrounds/<%=camp_id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
+            <label>Text</label>
+            <input  name="comment[text]" value="<%=comment.text%>" required>
+            <button class="ui button primary" type="submit">Submit</button>
+        </form>
+        </div>
+<%- include("partials/footer") %>

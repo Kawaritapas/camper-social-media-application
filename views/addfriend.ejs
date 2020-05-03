@@ -1,0 +1,27 @@
+<%- include("partials/header")%>
+<h2 style="color: white;text-align: center;">Suggested Users</h2>
+<%user.map(function(users){%>
+    <div class="ui container" >
+        <div class="ui segment" style="width: 600px;margin:auto;display: block;">
+    <div class="ui middle aligned divided list">
+        <div class="item">
+          <div class="right floated content">
+              
+                    <a href="/follow/<%=users.id%>">
+                      <button class="ui primary button">Follow</button>
+                      </a>
+                    
+             
+          </div>
+          <img style="width: 44px;height:44px;" class="ui avatar image" src="<%=users.avatar%>">
+          <div class="content">
+           <a href="/users/<%=users.id%>"> <%=users.username%></a>
+          </div>
+        </div>
+        </div>
+        <br>
+        </div>
+    </div>
+<%});%>
+
+<%- include("partials/footer")%>

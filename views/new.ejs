@@ -1,0 +1,35 @@
+<%- include("partials/header") %>
+<h1 style="text-align: center;">Add a new Place</h1>
+<div class="ui  segment">
+    <form class="ui form" action="/campgrounds" method="POST">
+        <div class="two fields">
+        <div class="field">
+        <label>Name</label>
+        <input name="name" placeholder="enter the name" required>
+        </div>
+        <div class="field">
+        <label>Image</label>
+        <input name="image" placeholder="enter image location"  required> 
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <input name="description" placeholder="Description..."  required> 
+            </div>
+        </div>
+        <div class="field"> 
+         <label>Price</label>
+         <input  name="price" placeholder="please enter the price" required>
+        </div>
+       <div class="field">
+       <label for="location">Location</label>
+       <input type="text" name="location" placeholder="enter location">
+       </div>
+        <button class="ui primary button" type="submit">Submit</button>
+    </form>
+    </div>
+    <a href="/campgrounds">
+    <button class="ui negative button">
+        Go to Campgrounds
+    </button>
+    </a>
+    <%- include("partials/footer") %>   

@@ -1,0 +1,184 @@
+<%- include("partials/header")%>
+
+<style>
+  .example {
+  height: 200px;
+  width: 330px;
+  overflow-x: scroll;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: red;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+<br></br>
+<%camp.map(function(camped){ %>
+  <div class="ui right fixed vertical menu" style="margin-top: 60px;width: 350px;">
+    <div class="item">
+      <img class="ui mini image" src="<%= camped.image %> ">
+     <% if(currentuser){%>
+        <a href="/users/<%=currentuser._id%>"> signed in as <strong><%=currentuser.username%></strong></a>
+      <%}else{%>
+     <a href="/login">please sign in</a>
+   <% }%>
+   <span style="font-size:21px;cursor:pointer;margin-left: 30px;" onclick="openNav()">&#9776; camper Live <i class="video small icon" style="color: red;"></i></span>
+    </div>
+    <div class="ui segment">
+      
+      <h4 style="color: grey;">  Help people discover new places</h4>
+     
+    <a href="/campgrounds/new">
+      <button style="margin: auto;display: block;" class="ui  button primary large">
+      Add new place
+      </button>
+      </a>
+      
+    <h4 style="color: grey;">Suggestions for you</h4>
+    <a href="/friends" class="ui image label">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjk3MzA2fQ">
+      Joe
+    </a>
+    <a href="/friends" class="ui image label">
+      <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjk3MzA2fQ">
+      Elliot
+    </a>
+    <a href="/friends">
+      <button class="ui green button">
+        Add friends
+      </button>
+         </a>
+</div>
+<div class="ui segment">
+  <div class="ui purple labels" >
+    <a class="ui label">
+      Notifications
+      <%if(currentuser){%>
+      <a class="ui black circular label"><%=notification.length%></a>
+      <%}%>
+    </a>
+    </div>
+  <br>
+ <% if(currentuser){%>
+  <div class="example" style="background-color: rgb(36, 36, 36);">
+    <a href="/notifications">view past notifications</a>
+    <% notification.map(function(notification){%>
+     <% if(notification.campgroundid){%>
+        <a href="/notifications/<%=notification.id%>" class="item" style="color: white;">
+         <span style="color: rgb(252, 0, 252);"> <%=notification.username%></span> created a new campground
+          </a>
+          <hr style="color: grey;">
+      <%}%>
+     <% if(notification.commentid){%>
+        <a href="/campgrounds/<%=notification.commentid%>" class="item" style="color: white;">
+         <span style="color: rgb(167, 248, 6);"> <%=notification.username%></span> added a comment
+          </a>
+          <hr style="color: grey;">
+      <%}%>
+  <% }) %>
+  
+  </div>
+      
+<%}%>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="http://localhost:3000" style="font-size: 20px;"><strong>Camper Live</strong> <i class="video small icon"></i></a>
+  <br>
+  <a href="#" style="font-size: 20px;">Camper News <i class="newspaper outline icon" ></i></a>
+  <br>
+  <a href="#"  style="font-size: 20px;">Camper Music <i class="music icon"></i></a>
+</div>
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+    </div>
+  
+  </div>
+  <div class="ui  container">  
+    <div class="ui big card" style="width:800px;height:auto;">
+      <div class="content">
+        <div class="right floated meta">14h</div>
+        <img class="ui avatar image" src="<%=camped.image%>"> <a href="/users/<%=camped.author.id%>"><%=camped.author.username%></a>  
+      </div>
+      <div class="image">
+        <img src="<%=camped.image%>">
+      </div>
+      <div class="content">
+       <%if(currentuser){%>
+        <form action="/likes/<%=camped._id%>" method="POST">
+         <button name="likes" type="submit" style="background-color: white;border: none;float: right;"> 
+          <div class="ui labeled button" tabindex="0">
+            <div class="ui red button">
+              <i class="heart icon"></i> Like
+            </div>
+            <a class="ui basic red left pointing label">
+              <%=camped.likes.length%>
+            </a>
+          </div>
+         </button>
+        </form>
+      <%}%>
+        <span class="left floated"><strong><%=camped.name%></strong></span>
+         
+      </div>
+      <a href="/campgrounds/<%=camped._id%>">
+        <button class="ui button primary">
+          More info
+        </button>
+      </a>
+    </div>
+    <br>
+    </div>
+<%});%>
+
+<%- include("partials/footer") %>
+
+

@@ -1,0 +1,22 @@
+<%- include("partials/header") %>
+
+<h1 style="color: white;text-align: center;margin-top:60px;">Welcome to Camper Sign Up</h1>
+<div class="ui main text container segment" style="background-image: linear-gradient(to top, #00bf8f, #001510);">
+<form  action="/register" method="POST" class="ui form">
+    <label style="color: white;">Username</label>
+<input name="username" placeholder="username" type="text">
+<label style="color: white;">Password</label>
+<input name="password" placeholder="password" type="password">
+<label style="color: white;">FirstName</label>
+<input name="firstName" placeholder="enter your first name" type="text">
+<label style="color: white;" >lastName</label>
+<input name="lastName" placeholder="enter your last name" type="text">
+<label style="color: white;">Email</label>
+<input name="email" placeholder="enter your email" type="text">
+<label style="color: white;">avatar</label>
+<input name="avatar" placeholder="enter image location" type="text">
+<button type="submit" class="ui primary button">Sign Up</button>
+</form>
+<p style="text-align: center;">Already have an account? <a href="/login" style="color: black;">Log in</a></p>
+</div>
+<%- include("partials/footer") %>

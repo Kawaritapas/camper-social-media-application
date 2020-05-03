@@ -1,0 +1,44 @@
+<%- include("partials/header") %>
+<h1 style="text-align: center;color: white;margin-top: 40px;">Edit profile</h1>
+    <div class="ui main text container segment" style="background-color: rgb(87, 85, 85);">
+        <form class="ui form" action="/users/<%=user._id%>/edit/updated?_method=PUT" method="POST">
+            <label style="color: white;">Profile Photo</label>
+            <input value="<%=user.avatar%>" type="text" name="avatar">
+            <label style="color: white;">cover photo</label>
+            <input value="<%=user.cover%>" type="text" name="cover">
+            <label style="color: white;">phone</label>
+            <input value="<%=user.phone%>" type="number" name="phone">
+            <label style="color: white;">date of birth</label>
+            <input value="<%=user.dateofbirth%>" type="date" name="dateofbirth">
+            <label style="color: white;">education</label>
+            <input value="<%=user.education%>" type="text" name="education">
+            <label style="color: white;">lives in</label>
+            <input value="<%=user.lives%>" type="text" name="lives">
+            <label style="color: white;">website</label>
+            <input value="<%=user.website%>" type="text" name="website">
+            <label style="color: white;">languages</label>
+            <input value="<%=user.languages%>" type="text" name="languages">
+            <label style="color: white;">Gender</label>
+            <div class="ui segment">
+            <div class="field">
+                <input type="radio"  name="gender" value="male">
+                <label for="male">Male</label><br>
+                <input type="radio"  name="gender" value="female">
+                <label for="female">Female</label><br>
+                <input type="radio"  name="gender" value="other">
+                <label>other</label>
+            </div>
+            </div>
+            <label style="color: white;">about you</label>
+            <input value="<%=user.aboutyou%>" type="text" name="aboutyou">
+            <label style="color: white;">firstname</label>
+            <input value="<%=user.firstName%>" type="text" name="firstName">
+            <label style="color: white;">lastname</label>
+            <input value="<%=user.lastName%>" type="text" name="lastName">
+            <label style="color: white;">email</label>
+            <input value="<%=user.email%>" type="text" name="email">
+            <button class="ui button primary" type="submit">Submit</button>
+        </form>
+        </div>
+<%- include("partials/footer") %>
+

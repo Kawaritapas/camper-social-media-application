@@ -1,0 +1,12 @@
+<%- include("partials/header") %>
+<h1 style="color: white;text-align: center;">Reset Password</h1>
+<div class="ui main text container segment">
+    <form class="ui form" action="/reset/<%=token%> " method="POST">
+<label>New password</label>
+<input type="password" name="password" placeholder="please enter your password" required>
+<label>confirm password</label>
+<input type="password" name="confirm" placeholder="confirm password" >
+<button type="submit" class="ui primary button">Submit</button>
+</form>
+</div>
+<%- include("partials/footer") %>

@@ -1,0 +1,35 @@
+<%- include("partials/header") %>
+<h1 style="text-align: center;">Add a new Place</h1>
+<div class="ui  segment">
+    <form class="ui form" action="/campgrounds/<%=camp._id%>?_method=PUT" method="POST">
+        <div class="two fields">
+        <div class="field">
+        <label>Name</label>
+        <input value="<%=camp.name%>" name="name"  required>
+        </div>
+        <div class="field">
+        <label>Image</label>
+        <input value="<%=camp.image%>" name="image"   required> 
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <input value="<%=camp.description%>" name="description"    required> 
+            </div>
+            <div class="field">
+            <label>Price</label>
+            <input value="<%=camp.price%> " name="price" required>
+            </div>
+            <div class="field">
+                <label>Location</label>
+                <input name="location" value="<%=camp.location%> " type="text" required>
+                </div>
+        </div>
+        <button class="ui primary button" type="submit">Submit</button>
+    </form>
+    </div>
+    <a href="/campgrounds">
+    <button class="ui negative button">
+        Go to Campgrounds
+    </button>
+    </a>
+    <%- include("partials/footer") %>   

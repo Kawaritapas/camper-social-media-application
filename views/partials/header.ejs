@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+<title>
+   Campers Paradise
+</title>
+</head>
+<body style="background-color: black" >
+    <div class="ui top fixed menu" style="background-color: black;">
+    <a class="active item" href="/" style="color: white;">
+        <i class="bath big icon" style="color: white;"></i>
+      Campers Home
+    </a>
+    <%if(currentuser){%>
+        <div class="ui action input" style="height: 30px;margin-top:15px;">
+            <form  action="/campgrounds" method="GET">
+            <input  style="padding-top: 5px;padding-bottom: 5px;border-top: aqua;border:aqua;"  type="text" placeholder="Search places..." name="search">
+            <button  style="z-index:1;padding:7px; border-radius: 0%;" class="ui primary button" type="submit">Search</button>
+            </form>
+          </div>
+          <div class="right menu">
+            <div class="item">
+        <a href="http://localhost:8000/" class="ui orange label" style="height:30px;padding-top: 8px;width: 140px;margin-right: 600px;text-align: center;border-color:orange;">Camper Discussions</a>
+        </div>
+        </div>
+    <%}%> 
+    
+    <div class="right menu">
+      <%   if(!currentuser){%>
+            <div class="item">
+                <a href="/login" class="ui grey button">Log In</a>
+            </div>
+            <div class="item">
+                <a href="/register" class="ui grey button">Sign Up</a>
+            </div>
+      <%  }else{%>
+
+            <div class="item">
+                <a href="/logout" class="ui negative button">log Out</a>
+                
+            </div>
+       <% }%>
+    </div>
+</div>
+
+<div class="ui container" style="margin-top: 60px;">
+   <% if(error&&error.length>0){%>
+        <div class="ui red message"><%=error %> </div>   
+    <%}%>
+   
+  <%  if(success&&success.length>0){%>
+        <div class="ui green message"><%=success %> </div>
+    <%}%>
+  
+</div>
+   <br>
+
+
+ 

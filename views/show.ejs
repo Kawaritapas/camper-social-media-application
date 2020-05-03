@@ -1,0 +1,145 @@
+<%- include("partials/header")%>
+<div class="ui segment"  style="background-color:black;">
+<div class="ui grid" >
+    <div class="ui four wide column" style="margin-left: 20px;">
+        <h3 style="color: white;">Camper</h3>
+        <div class="ui  segment">
+        <div class="ui  animated list">
+            <div class="item">
+              <img class="ui avatar image" src="<%=camp.image%>">
+              <div class="content">
+                <a href=""><div class="header">info 1</div></a>
+              </div>
+            </div>
+            <div class="item">
+              <img class="ui avatar image" src="<%=camp.image%>">
+              <div class="content">
+                <div class="header">info 2</div>
+              </div>
+            </div>
+            <div class="item">
+              <img class="ui avatar image" src="<%=camp.image%>">
+              <div class="content">
+                <div class="header">info 3</div>
+              </div>
+            </div>
+          </div>
+    </div>
+    </div>
+    <div class="nine wide column" style="margin-left: 50px;">
+        <div class="ui segment">
+<div class="ui huge image">
+<img src="<%=camp.image%>" >
+</div>
+<div class="extra">
+<div class="ui label"><h4 style="color: black;"><%=camp.name%></h4></div>
+<div class="ui label"><h4 style="color: black;"><%=camp.price%>$</h4></div>
+<%if(currentuser&& camp.author.id.equals(currentuser._id)){%>
+<a href="/campgrounds/<%=camp._id%>/edit" style="float: right;">
+  <button class="ui yellow button" style="color:black;">
+    Edit the post
+  </button>
+</a>
+<a href="/<%=camp._id%>" style="float: right;">
+  <button class="ui button negative">
+    Delete
+  </button>
+</a>
+<%}%>
+</div>
+<p><%=camp.description%></p>
+        </div>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+     
+      #map {
+        height: 40%;
+      }
+      
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        var lat = <%=camp.lat%>;
+        var lng= <%=camp.lng%>;
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: lat, lng: lng},
+          zoom: 9
+        });
+        var marker=new google.maps.Marker({
+            position:{
+                lat:lat,lng:lng
+            },
+           map:map
+        });
+        var info=new google.maps.InfoWindow({
+          content:`
+           <strong><%=camp.name%>
+           <br />
+           <%=camp.location%>
+          </strong>
+          `
+        });
+        marker.addListener("click",function(){
+        info.open(map,marker);
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=your api key here&callback=initMap"
+    async defer></script>
+  
+
+
+<div class="ui segment" style="background-color: rgb(179, 179, 179);">
+    <a style="float: right;" href="/campgrounds/<%=camp._id%>/comments/new"><button class="ui primary button" type="submit">Add New Comment</button></a>
+    <br>
+    <br>
+<%camp.comments.map(function(comment){%>
+    <div class="ui segment">
+    <div class="ui relaxed list">
+        <div class="item">
+         <img class="ui avatar image" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjk3MzA2fQ" >
+         <div class="content">
+         <p class="header"><strong><%=comment.author.username%></strong> <span style="color: slategrey;">10 days ago</span></p>
+         <div class="description">
+           <strong> <%=comment.text%></strong>
+         </div>
+         </div>
+        <% if(currentuser&&comment.author.id.equals(currentuser._id)){%>
+         <a href="/campgrounds/<%=camp._id%>/<%=comment._id%>/edit">
+          <button class="ui yellow tiny button" style="float: right;">
+             edit
+          </button>
+          </a>
+          <a href="/campgrounds/<%=camp._id%>/<%=comment._id%>/delete/deleted">
+            <button class="ui red tiny button" style="float: right;">
+               delete
+            </button>
+            </a>
+       <%   }%>
+        </div>
+    </div>
+    </div>
+<%});%>
+    </div>
+    </div>
+ <div class="three wide column">
+
+ </div>
+ </div>
+ </div>
+<%- include("partials/footer")%>
+    
+
+
+
+
